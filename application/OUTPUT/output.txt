@@ -1,0 +1,16 @@
+abates 0
+abattoir 1
+abattoirs 1
+abbe 1
+abbess 1
+abbey 1
+abbeys 1
+abbot 1
+abbots 1
+abbreviate 2
+abbreviated 2
+abbreviates 2
+abbreviating 0
+abbreviation 1
+abbreviations 1
+abdicate 0
