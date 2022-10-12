@@ -14,59 +14,87 @@ class ChildSpeaker(ISpeaker):
     _all_letters = 'abcdefghijklmnopqrstuvwxyz'
     _vowels = 'aeiouy'
     _consonants = 'bcdfghjklmnpqrstvwxz'    # tady nelze použít ''.join([letter for letter in all_letters if letter not in vowels])
-             
-    def _starts_with_vowel(self, given_word):
-        return given_word[0] in type(self)._vowels
-
-    def _ends_with_consonant(self, word):
-        return word[-1] in type(self)._consonants
-
-    def _get_consonants(self, word):
-        consonant_list = []
+   
+    def _get_first_consonant(self, word):
         for letter in word:
             if letter in type(self)._consonants:
-                consonant_list.append(letter)
-        return consonant_list
+                return letter
 
-    def _replace_aftergoing_consonants(self, word, consonant):
+    def say(self, word):
+        first_consonant = self._get_first_consonant(word)
+        if word[0] in type(self)._vowels:
+            word = first_consonant + word
+        new_word = []
+        consonant_counter = 0
+        vowel_counter = 0
         for letter in word:
             if letter in type(self)._consonants:
-                word = word.replace(letter, consonant)
-        return word
-
-    def _replace_consecutive_vowels(self, word):
-        new_str = []
-        counter = 0
-        for n, letter in enumerate(word):
-            if letter in type(self)._consonants:
-                new_str.append(letter)
-                counter = 0
+                vowel_counter = 0
+                if consonant_counter == 0:
+                    new_word.append(first_consonant)
+                    consonant_counter += 1
             else:
-                new_str.append(letter)
-                counter += 1
-                if counter > 1:
-                    new_str.pop(-2)
-                    counter = 1
-        return new_str
+                consonant_counter = 0
+                vowel_counter += 1
+                if vowel_counter > 1:
+                    new_word = new_word[:-1]
+                new_word.append(letter)
+        if new_word[-1] in type(self)._consonants:
+            new_word = new_word[:-1]
+        return ''.join(new_word)
+    
+              
+    # def _starts_with_vowel(self, given_word):
+    #     return given_word[0] in type(self)._vowels
 
-    def _replace_same_consecutive(self, word):
-        last_letter = ''
-        new_str = []
-        for letter in word:
-            if letter != last_letter:
-                new_str.append(letter)
-                last_letter = letter
-        return ''.join(new_str)
+    # def _ends_with_consonant(self, word):
+    #     return word[-1] in type(self)._consonants
 
-    def say(self, given_word):
-        if self._starts_with_vowel(given_word):
-            word = self._get_consonants(given_word)[0] + given_word
-        else: 
-            word = given_word
-        word = self._replace_aftergoing_consonants(word, word[0])
-        word = self._replace_consecutive_vowels(word)
-        word = self._replace_same_consecutive(word)
-        if self._ends_with_consonant(word):
-            return word[:-1]
-        return word
+    # def _get_consonants(self, word):
+    #     consonant_list = []
+    #     for letter in word:
+    #         if letter in type(self)._consonants:
+    #             consonant_list.append(letter)
+    #     return consonant_list
 
+    # def _replace_aftergoing_consonants(self, word, consonant):
+    #     for letter in word:
+    #         if letter in type(self)._consonants:
+    #             word = word.replace(letter, consonant)
+    #     return word
+
+    # def _replace_consecutive_vowels(self, word):
+    #     new_str = []
+    #     counter = 0
+    #     for n, letter in enumerate(word):
+    #         if letter in type(self)._consonants:
+    #             new_str.append(letter)
+    #             counter = 0
+    #         else:
+    #             new_str.append(letter)
+    #             counter += 1
+    #             if counter > 1:
+    #                 new_str.pop(-2)
+    #                 counter = 1
+    #     return new_str
+
+    # def _replace_same_consecutive(self, word):
+    #     last_letter = ''
+    #     new_str = []
+    #     for letter in word:
+    #         if letter != last_letter:
+    #             new_str.append(letter)
+    #             last_letter = letter
+    #     return ''.join(new_str)
+
+    # def say(self, given_word):
+    #     if self._starts_with_vowel(given_word):
+    #         word = self._get_consonants(given_word)[0] + given_word
+    #     else: 
+    #         word = given_word
+    #     word = self._replace_aftergoing_consonants(word, word[0])
+    #     word = self._replace_consecutive_vowels(word)
+    #     word = self._replace_same_consecutive(word)
+    #     if self._ends_with_consonant(word):
+    #         return word[:-1]
+    #     return word
