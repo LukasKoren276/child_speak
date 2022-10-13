@@ -1,0 +1,13 @@
+Task assignment:
+
+Child speaks
+My son is learning how to talk. Talking is hard challenge though. Consonants give him a particularly hard time! Therefore, he has created his own child language. After some time, we started to notice some rules of it:
+• He uses exactly one unique consonant in the word – once he comes to the first consonants, he replaces all the subsequent consonants with that first one. Example: instead of mapa, he says mama
+• If the word starts with a vowel, he puts the first consonant at the very beginning, so instead of alibaba he says lalilala
+• If there is a group of consecutive consonants, he replaces the whole group with just a single consonant. For example: instead of lampa, he says lala, instead of bratislava he says babibaba
+• If there is group of consecutive vowels, he replaces that group with the last vowel from the group. So instead of naomi he says noni, instead of aikido, he says kikiko (ai was replaces by i and prepended by k, because of the 2nd rule)
+• He ignores all the consonants after the last vowel, so instead of ahoj he says haho.
+Understanding such a child language is a demanding task especially because many words’ pronunciation is the same.
+In this task, you’ll be given a list of all the words that matter, your job is for each word to calculate, how many other words (from the same list) have the same pronunciation in my son’s child language.
+The input contains multiple words, one word per line. For every word produce a word n line in the output file, where n is a count of words from the list having the same pronunciation as word. All lines in your output file must be alphabetically sorted. (i.e., with word alan must precede the line with mapa) Alternatively, you can use a JSON input file with an array of words.
+You can assume, that the input has less than 100,000 words. In consists only of lowercase words, using the 26-letter English alphabet: abcdefghijklmnopqrstuvwxyz. You can also assume that each word in the list contains at least one consonant and one of the vowels: aeiouy. The input may contain the same words multiple times. Even if a word is present multiple times in the input, the output should only contain it once.
